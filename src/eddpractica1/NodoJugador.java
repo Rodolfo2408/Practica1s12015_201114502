@@ -10,6 +10,41 @@ package eddpractica1;
  */
 public class NodoJugador {
     public NodoJugador sig, ant;
+    public ListaCampos campos;
     
-    String nombre;
+    String Nombre;
+    
+    public NodoJugador(String campo) {
+        this.Nombre = campo;
+    }
+    
+    public NodoJugador(String Nombre, NodoCampo nuevo) {
+        this.Nombre = Nombre;
+        campos = new ListaCampos(nuevo);
+        this.ant = this.sig = null;
+    }
+    
+    public String getDato(){
+        return Nombre;
+    }
+    
+    public void setDato(){
+        this.Nombre = Nombre;
+    }
+    
+    public NodoJugador getAnterior(){
+        return ant;
+    }
+    
+    public void setAnterior(NodoJugador anterior){
+        this.ant = anterior;
+    }
+    
+    public NodoJugador getSiguiente(){
+        return sig;
+    }
+    
+    public void setSiguiente(NodoJugador siguiente){
+        this.sig = siguiente;
+    }
 }

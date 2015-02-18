@@ -8,17 +8,15 @@ package eddpractica1;
  *
  * @author Rodolfo
  */
-public class ListaZombie {
+public class ListaPlanta {
+    Planta primero, ultimo;
     
-    Zombie inicio;
-    Zombie ultimo;
-    
-    public ListaZombie(Zombie nuevo){
-        inicio = ultimo = nuevo;
+    public ListaPlanta(Planta nuevo){
+       primero = ultimo = nuevo;
     }
     
-    public void add(Zombie nuevo){
-        Zombie piv = inicio;
+    public void add(Planta nuevo){
+        Planta piv = primero;
         while(piv != null){
             if(piv.siguiente == null){
                 piv.siguiente = nuevo;
@@ -31,19 +29,19 @@ public class ListaZombie {
     }
     
     public boolean delete(String nombre){
-        Zombie aux = inicio;      
-        if(inicio != null){
+        Planta aux = primero;      
+        if(primero != null){
             while(aux!= null){
                 if(aux.nombre.equals(nombre)){
-                   if(inicio.nombre.equals(nombre) && inicio.siguiente == null){
-                        inicio =null;
+                   if(primero.nombre.equals(nombre) && primero.siguiente == null){
+                        primero =null;
                         ultimo=null;
                         //System.out.println("Unico Contacto Borrado");
                         return true;
                    }
-                   else if(inicio.nombre.equals(nombre)){
-                        inicio = inicio.siguiente;
-                        inicio.anterior =null;
+                   else if(primero.nombre.equals(nombre)){
+                        primero = primero.siguiente;
+                        primero.anterior =null;
                         //System.out.println("inicio borrado");
                         return true;
                     }
@@ -64,7 +62,7 @@ public class ListaZombie {
     }
     
     public boolean buscarDato(String dato){
-        Zombie pivot = inicio;
+        Planta pivot = primero;
         while (pivot != null){
             if (pivot.getDato().equalsIgnoreCase(dato)){
                 return true;
@@ -73,5 +71,4 @@ public class ListaZombie {
         }
         return false;
     }
-    
 }

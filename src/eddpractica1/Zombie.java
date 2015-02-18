@@ -11,37 +11,44 @@ package eddpractica1;
 public class Zombie {
     
     boolean vivo;
-    int posX;
-    int posy;
-    String tipo;
-    int rango;
-    int daxo;
-    String descripcion, imagenURLZ;
+    String nombre, tipo, imagenURL;
+    int ataque, defensa;
     Zombie siguiente;
     Zombie anterior;
    
     public Zombie(){}
-    public Zombie(int posX, int posy, String tipo, int rango, int daxo) {
-        this.posX = posX;
-        this.posy = posy;
-        this.tipo = tipo;
-        this.rango = rango;
-        this.daxo = daxo;
-        this.vivo = true;
-        this.siguiente = null;
-        this.anterior = null;
-    }
 
-    public Zombie(int posX, int posy, String tipo, int rango, int daxo, String descripcion) {
-        this.posX = posX;
-        this.posy = posy;
+    public Zombie(String nombre, String tipo, String imagenURL, int ataque, int defensa, boolean vivo) {
+        this.nombre = nombre;
         this.tipo = tipo;
-        this.rango = rango;
-        this.daxo = daxo;
-        this.descripcion = descripcion;
+        this.imagenURL = imagenURL;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.vivo = vivo;
         this.vivo = true;
-        this.siguiente = null;
-        this.anterior = null;
     }
     
+    public String getDato(){
+        return nombre;
+    }
+    
+    public void setDato(){
+        this.nombre = nombre;
+    }
+    
+    public Zombie getAnterior(){
+        return anterior;
+    }
+    
+    public void setAnterior(Zombie anterior){
+        this.anterior = anterior;
+    }
+    
+    public Zombie getSiguiente(){
+        return siguiente;
+    }
+    
+    public void setSiguiente(Zombie siguiente){
+        this.siguiente = siguiente;
+    }    
 }

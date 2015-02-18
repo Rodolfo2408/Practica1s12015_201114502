@@ -10,6 +10,7 @@ package eddpractica1;
  */
 public class JugPlantas extends javax.swing.JFrame {
 
+    int cantidad;
     /**
      * Creates new form JugPlantas
      */
@@ -45,8 +46,18 @@ public class JugPlantas extends javax.swing.JFrame {
         jLabel3.setText("Cantidad: ");
 
         jButton1.setText("Agregar mas Campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Siguiente");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,6 +112,18 @@ public class JugPlantas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String nombre = jTextField1.getText();
+        cantidad = Integer.parseInt(jTextField2.getText());
+        String campo = jTextField3.getText();
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

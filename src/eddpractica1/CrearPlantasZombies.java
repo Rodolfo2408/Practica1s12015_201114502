@@ -4,6 +4,7 @@
  */
 package eddpractica1;
 
+import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -12,6 +13,7 @@ import javax.swing.*;
  */
 public class CrearPlantasZombies extends javax.swing.JFrame {
 
+    
     /*
     ImageIcon[] items = 
     {
@@ -77,6 +79,11 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel4.setText("Puntos Defensa");
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Eliminar");
 
@@ -168,6 +175,10 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
 //            jComboBox3.addItem(items[i]);
 //        }        
     }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
