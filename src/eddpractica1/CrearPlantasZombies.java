@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class CrearPlantasZombies extends javax.swing.JFrame {
 
-    
+    public Lista_Jugador jugadores;
     /*
     ImageIcon[] items = 
     {

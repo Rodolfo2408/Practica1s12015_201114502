@@ -11,6 +11,8 @@ package eddpractica1;
 public class JugPlantas extends javax.swing.JFrame {
 
     int cantidad;
+    public Lista_Jugador jugadores;
+    public NodoJugador actual;
     /**
      * Creates new form JugPlantas
      */
@@ -114,14 +116,35 @@ public class JugPlantas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nombre = jTextField1.getText();
+        String campo = jTextField3.getText();
         
+        if(jugadores == null){
+            NodoCampo NC = new NodoCampo(campo);
+            NodoJugador NJ = new NodoJugador(nombre, NC);
+            jugadores = new Lista_Jugador(NJ);
+            actual = NJ;
+        }else{
+            if(actual != null){
+                NodoCampo NC = new NodoCampo(campo);
+                actual.campos.add(NC);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String nombre = jTextField1.getText();
         cantidad = Integer.parseInt(jTextField2.getText());
-        String campo = jTextField3.getText();
-        
+        NodoJugador nj = new NodoJugador(nombre);
+        if(jugadores == null){
+            jugadores = new Lista_Jugador(nj);
+        }else{
+            jugadores.add(nj);
+            CrearPlantasZombies CPZ = new CrearPlantasZombies();
+            CPZ.jugadores = jugadores;
+            this.dispose();
+            CPZ.setVisible(true);
+        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
