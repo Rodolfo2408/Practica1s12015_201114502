@@ -86,6 +86,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JugPlantas jp = new JugPlantas();
+        this.dispose();
         jp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 

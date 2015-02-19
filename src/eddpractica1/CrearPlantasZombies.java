@@ -13,26 +13,10 @@ import javax.swing.*;
  */
 public class CrearPlantasZombies extends javax.swing.JFrame {
 
+    public ListaPlanta plantas;
+    public ListaZombie zombies;
+    
     public Lista_Jugador jugadores;
-    /*
-    ImageIcon[] items = 
-    {
-      new ImageIcon(getClass().getResource("/images/planta1.png")),
-      new ImageIcon(getClass().getResource("/images/planta2.png")),
-      new ImageIcon(getClass().getResource("/images/planta3.png")),
-      new ImageIcon(getClass().getResource("/images/planta4.png")),
-      new ImageIcon(getClass().getResource("/images/planta5.png")),
-      new ImageIcon(getClass().getResource("/images/planta6.png")),
-      new ImageIcon(getClass().getResource("/images/planta7.png")),
-      
-      new ImageIcon(getClass().getResource("/images/zombie1.png")),
-      new ImageIcon(getClass().getResource("/images/zombie2.png")),
-      new ImageIcon(getClass().getResource("/images/zombie3.png")),
-      new ImageIcon(getClass().getResource("/images/zombie4.png")),
-      new ImageIcon(getClass().getResource("/images/zombie5.png")),
-      new ImageIcon(getClass().getResource("/images/zombie6.png")),
-      new ImageIcon(getClass().getResource("/images/zombie7.png")),
-    };*/
     
     /**
      * Creates new form CrearPlantasZombies
@@ -62,7 +46,8 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        ComboImages = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,13 +80,15 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("SimSun-ExtB", 0, 24)); // NOI18N
         jLabel6.setText("Creacion de Personajes");
 
-        jComboBox3.setMaximumRowCount(15);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        ComboImages.setMaximumRowCount(15);
+        ComboImages.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                ComboImagesActionPerformed(evt);
             }
         });
+
+        jButton3.setText("Siguiente>>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +103,7 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboImages, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -133,13 +120,16 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(136, 136, 136)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,25 +149,31 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-//        for(int i=0; i<items.length; i++){
-//            jComboBox3.addItem(items[i]);
-//        }        
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    private void ComboImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboImagesActionPerformed
+       
+    }//GEN-LAST:event_ComboImagesActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String imagen,nombre, ataque;
+        int ptsAtaque, ptsDefensa;
+        //imagen = 
         
+        if(plantas != null){
+            
+            zombies.add(null);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -216,10 +212,11 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox ComboImages;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
