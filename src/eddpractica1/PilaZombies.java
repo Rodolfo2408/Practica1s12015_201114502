@@ -12,10 +12,10 @@ import javax.swing.*;
  * @author Rodolfo
  */
 public class PilaZombies {
-    Queue<Zombie> cola;
-    Stack<Planta> pila;
+    //Queue<Zombie> cola;
+    //Stack<Planta> pila;
     
-    class NodoPila{
+    public class NodoPila{
         Object obj;
         NodoPila sig;
         
@@ -24,8 +24,8 @@ public class PilaZombies {
         }
         
         public NodoPila(Object o){
-        obj=o;
-        sig=null;
+            obj=o;
+            sig=null;
         }
 
         public NodoPila(Object o,NodoPila s){
@@ -58,7 +58,7 @@ public class PilaZombies {
         if(vacio(tope)==true){ 
             NodoPila aux = tope;  
             tope=tope.getSig(); 
-            //mostrar(aux); 
+            mostrar(aux); 
         }else{ 
             System.out.println("La pila Esta Vacia"); 
         } 
@@ -70,14 +70,12 @@ public class PilaZombies {
             return true; 
         }return false; 
     }
-
-    /*
+    
     public void mostrar(NodoPila aux){ 
         Zombie xxx = (Zombie)aux.getObjeto(); 
-        System.out.println("Nombre: "+xxx.getNombre()); 
-        System.out.println("Apellido: "+xxx.getApellido()); 
-        System.out.println("Edad: "+xxx.getEdad()); 
-    } 
-    */
+        System.out.println("Nombre: "+xxx.nombre); 
+        System.out.println("Apellido: "+xxx.imagenURL); 
+        System.out.println("Edad: "+xxx.tipo); 
+    }     
 }
 

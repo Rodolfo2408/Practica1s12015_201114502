@@ -10,7 +10,7 @@ import javax.swing.*;
  * @author Rodolfo
  */
 public class ColaPlantas {
-    public int maximo;
+    public int maximo=100;
     public Planta[] plantas;
     public int inicio, fin;
     
@@ -43,6 +43,9 @@ public class ColaPlantas {
         }else{
             inicio = (inicio+1) % maximo;
             p = plantas[inicio];
+            System.out.print("Planta: "+p.nombre +"\n");
+            System.out.print("Imagen: "+p.imagenURL+"\n");
+            System.out.print("Tipo: "+p.tipo+"\n");
         }
         return p;
     }

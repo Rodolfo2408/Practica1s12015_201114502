@@ -5,6 +5,8 @@
 package eddpractica1;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -18,11 +20,45 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
     
     public Lista_Jugador jugadores;
     
+    PilaZombies pila = new PilaZombies();
+    ColaPlantas cola = new ColaPlantas();
+    public JChomboBox jchombobox;
+    
+    public ImageIcon[] ItemsPlantas = {
+        new ImageIcon(getClass().getResource("/Images/planta1.png")),
+        new ImageIcon(getClass().getResource("/Images/planta2.png")),
+        new ImageIcon(getClass().getResource("/Images/planta3.png")),
+        new ImageIcon(getClass().getResource("/Images/planta4.png")),
+        new ImageIcon(getClass().getResource("/Images/planta5.png")),
+        new ImageIcon(getClass().getResource("/Images/planta6.png")),
+        new ImageIcon(getClass().getResource("/Images/planta7.png")),
+    };
+    
+    public ImageIcon[] ItemsZombies = {
+        new ImageIcon(getClass().getResource("/Images/zombie1.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie2.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie3.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie4.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie5.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie6.png")),
+        new ImageIcon(getClass().getResource("/Images/zombie7.png")),
+    };
+    
     /**
      * Creates new form CrearPlantasZombies
      */
     public CrearPlantasZombies() {
         initComponents();
+        jchombobox = new JChomboBox(ItemsPlantas.length);
+        jComboRender render = new jComboRender(ItemsPlantas);
+        jchombobox.setRenderer(render);
+        this.add(jchombobox);
+        jchombobox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println("Se Selecciono la Imagen "+ jchombobox.getSelectedItem());
+            }
+        });
     }
 
     /**
@@ -38,16 +74,18 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox();
+        btbAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        ComboDisparo = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtPtsAtaque = new javax.swing.JTextField();
+        txtPtsDefensa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         ComboImages = new javax.swing.JComboBox();
-        jButton3 = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        btbModificar = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,16 +101,21 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
         jLabel4.setText("Puntos Defensa");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btbAdd.setText("Agregar");
+        btbAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btbAddActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Eliminar");
+        btnDelete.setText("Eliminar");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disparo", "Directo" }));
+        ComboDisparo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disparo", "Directo" }));
 
         jLabel5.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
         jLabel5.setText("Ataque");
@@ -88,16 +131,16 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Siguiente>>");
+        btnSiguiente.setText("Siguiente>>");
+
+        btbModificar.setText("Modificar");
+
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel6)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,36 +150,49 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(txtNombre)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ComboDisparo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jButton1)
+                        .addGap(44, 44, 44)
+                        .addComponent(btbAdd)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(btbModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnSiguiente)
                         .addGap(43, 43, 43))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel6)
-                .addGap(35, 35, 35)
+                .addGap(4, 4, 4)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -145,16 +201,17 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComboDisparo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboImages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btnDelete)
+                    .addComponent(btbAdd)
+                    .addComponent(btnSiguiente)
+                    .addComponent(btbModificar))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -165,16 +222,21 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
        
     }//GEN-LAST:event_ComboImagesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddActionPerformed
         String imagen,nombre, ataque;
         int ptsAtaque, ptsDefensa;
-        //imagen = 
+        imagen = jTextField1.getText();
+        nombre = txtNombre.getText();
+        ataque = (String) ComboDisparo.getSelectedItem();
+        ptsAtaque = Integer.parseInt(txtPtsAtaque.getText());
+        ptsDefensa = Integer.parseInt(txtPtsDefensa.getText());
         
-        if(plantas != null){
-            
-            zombies.add(null);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_btbAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,11 +274,12 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox ComboDisparo;
     private javax.swing.JComboBox ComboImages;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JButton btbAdd;
+    private javax.swing.JButton btbModificar;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -224,7 +287,8 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPtsAtaque;
+    private javax.swing.JTextField txtPtsDefensa;
     // End of variables declaration//GEN-END:variables
 }
