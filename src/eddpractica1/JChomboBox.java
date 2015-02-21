@@ -17,6 +17,7 @@ public class JChomboBox extends JComboBox{
         Dimension dim = new Dimension(206,26);
         this.setSize(dim);
         this.setPreferredSize(dim);
+        this.setAlignmentY((float) 0.5);
         
         for(int i=0; i<items; i++){
             this.addItem(i);
