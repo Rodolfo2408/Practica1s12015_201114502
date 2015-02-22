@@ -90,10 +90,39 @@ public class Matriz2 {
     
     void imprimir(NodoMat2 M){
         NodoMat2 aux=M.sigcol;
+        NodoMat2 o;
+        int nca=0,ncc=0,nt=0;
+        NodoMat2 e,g,h;
         System.out.print(M.URLImage+" ");
         while(aux.col!=M.col){
             System.out.print(aux.col+" ");
             aux=aux.sigcol;
+        }
+        System.out.println("" );
+        NodoMat2 aux2=M.sigcol;
+        aux=M.sigfil;
+        while(aux.fil!=M.fil){
+            System.out.print(aux.fil+" ");
+            o=aux;
+            e=aux.sigcol;
+
+            
+            
+            while(o!=e){
+                int nc=e.col;
+                nt=nc;
+                int nf=e.fil;
+                if(nf==nca){
+                nc=nc-ncc;
+                }
+                for(int i=1;i<nc;i++){
+                System.out.print(" ");
+                }
+                System.out.print(e.URLImage+" ");
+                e=e.sigcol;
+                nca=nf;
+                ncc=nt;
+            }
         }
     }
 }
