@@ -19,7 +19,7 @@ public class Planta {
 
     public Planta(){}
     
-    public Planta(String nombre, String tipo, int defensa, int ataque, boolean vivo) {
+    public Planta(String nombre, String tipo, String imagen, int defensa, int ataque, boolean vivo) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.ataque = ataque;

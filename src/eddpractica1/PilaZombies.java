@@ -74,8 +74,8 @@ public class PilaZombies {
     public void mostrar(NodoPila aux){ 
         Zombie xxx = (Zombie)aux.getObjeto(); 
         System.out.println("Nombre: "+xxx.nombre); 
-        System.out.println("Apellido: "+xxx.imagenURL); 
-        System.out.println("Edad: "+xxx.tipo); 
+        System.out.println("Imagen: "+xxx.imagenURL); 
+        System.out.println("Tipo: "+xxx.tipo); 
     }     
 }
 

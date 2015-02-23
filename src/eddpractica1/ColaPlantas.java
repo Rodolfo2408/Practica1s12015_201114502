@@ -10,55 +10,89 @@ import javax.swing.*;
  * @author Rodolfo
  */
 public class ColaPlantas {
-    public int maximo=100;
-    public Planta[] plantas;
-    public int inicio, fin;
     
-    public ColaPlantas(){
-        this.plantas = new Planta[maximo + 1];
-        inicio = fin = 0;
-    }
-    
-    public boolean Empty(){
-        return inicio == fin;
-    }
-    
-    public boolean Full(){
-        return tamanio() == maximo + 1;
-    }
-    
-    public void add(Planta P){ //agregar en cola
-        if(Full()){
-            JOptionPane.showMessageDialog(null, "Cola Llena");
-        }else{
-            fin = (fin+1) % maximo;
-            plantas[fin] = P;
+    public class Node {
+        Object elem;
+        Node Next;
+
+        public Node(Object o) {
+            elem = o;
+            Next = null;
+        }
+        
+        public Object getObjeto(){
+            return elem;
         }
     }
-    
-    public Planta poll(){ //eliminar en cola
-        Planta p = null;
-        if(Empty()){
-            JOptionPane.showMessageDialog(null, "Cola Vacia");
+
+    Node first;
+    Node end;
+    int size;
+
+    public ColaPlantas() {
+        end = null;
+        size = 0;
+    }
+
+    public void add(Object o) {
+        Node new_node = new Node(o);
+        if (first == null) {
+            first = new_node;
+            end = new_node;
         }else{
-            inicio = (inicio+1) % maximo;
-            p = plantas[inicio];
-            System.out.print("Planta: "+p.nombre +"\n");
-            System.out.print("Imagen: "+p.imagenURL+"\n");
-            System.out.print("Tipo: "+p.tipo+"\n");
+            end.Next = new_node;
+            end = new_node;
         }
-        return p;
-    }
-    
-    public int tamanio(){
-        return (fin-inicio+maximo)%maximo;
-    }
-    
-//    public void peek(){
-//        if(Empty()){
-//            JOptionPane.showMessageDialog(null, "Cola Vacia, No hay nada que mostrar");
-//        }else{
-//            
+        size++;
+    }; // inserts an object 
+
+    public int poll(){
+//        if (first == null){
+//          return null;
 //        }
-//    }
+        if(isEmpty() == false){
+            Object o = first.elem;
+            first = first.Next;
+            System.out.println(first.elem);
+            mostrar(first);
+            size=-1;
+        }else{
+            System.out.println("La Cola Esta Vacia"); 
+        }
+        return 0;
+        
+//        public int Pop(){ 
+//        if(vacio(tope)==true){ 
+//            PilaZombies.NodoPila aux = tope;  
+//            tope=tope.getSig(); 
+//            mostrar(aux); 
+//        }else{ 
+//            System.out.println("La pila Esta Vacia"); 
+//        } 
+//        return 0; 
+//        } 
+    } // gets the object from the queue
+
+    public boolean isEmpty() {
+        return (size == 0);
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public Object first() {
+        if (first == null){
+          return null;
+        }else{
+          return first.elem;
+        }
+   }
+    
+    public void mostrar(Node aux){
+        Planta xxx = (Planta)aux.getObjeto(); 
+        System.out.println("Nombre: "+xxx.nombre); 
+        System.out.println("Imagen: "+xxx.imagenURL); 
+        System.out.println("Tipo: "+xxx.tipo); 
+    }
 }
