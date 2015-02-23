@@ -9,17 +9,16 @@ package eddpractica1;
  * @author Rodolfo
  */
 public class NodoMat2 {
-    String URLImage;
-    public Lista_Personajes CaracterList;
-    int fil;
+     int fil;
     int col;
-    NodoMat2 sigfil, sigcol;
-    
-    NodoMat2(int f,int c, String imagen, Personaje Nodopersonajes){
-        this.URLImage = imagen;
-        this.CaracterList = new Lista_Personajes(Nodopersonajes);
+    int info;
+    NodoMat2 sigfil;
+    NodoMat2 sigcol;
+    public NodoMat2(int i,int f,int c)	{
+        this.info=i;
         this.fil=f;
         this.col=c;
-        this.sigfil = this.sigcol=null;
+        this.sigfil=null;
+        this.sigcol=null;
     }
 }
