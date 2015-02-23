@@ -9,53 +9,108 @@ package eddpractica1;
  * @author Rodolfo
  */
 public class Matriz_Ortogonal {
-    NodoMat actual;
     
-    public Matriz_Ortogonal(){
-        actual = new NodoMat("Nothing", null);
+    public void add(Lista_Cabecera col, Lista_Cabecera fil, int tipo, int x, int y, String pic, int danio, int ataque){
+        NodoMat actX=null,actY=null;
+        NodoMat nuevo = new NodoMat(tipo,x,y,pic,danio,ataque);
+        Nodo_Cabecera auxC,auxF;
+        auxC=col.buscar(y);     //todos los nodos a buscar deben existir
+        auxF=fil.buscar(x);
+        if(auxC.interior==null){
+            auxC.interior=nuevo;
+        }else{
+            actX=ubicarColumna(auxC.interior,nuevo,x);
+        }
+        if(auxF.interior==null){
+            auxF.interior=nuevo;
+        }else{
+            actY=ubicarFila(auxF.interior,nuevo,y);
+        }
+        if(actX!=null && actY!=null){
+            ubicarProfundidad(actX,nuevo);
+        }
     }
     
-    public void ConecSimpFila(NodoMat nodo1, NodoMat nodo2){
-        nodo1.derecha = nodo2;
-        nodo2.izquierda = nodo1;
+    private NodoMat ubicarColumna(NodoMat primero, NodoMat nuevo, int x){
+        NodoMat aux=primero;
+        while(aux.abajo!=null && aux.posx!=x){
+            aux=aux.abajo;
+        }
+        if(aux.posx==x){//verificar
+            return aux;
+            //ubicarProfundidad(aux,nuevo);
+        }else{
+            aux.abajo=nuevo;
+            nuevo.arriba=aux;
+            return null;
+        }
     }
     
-    public void ConecDobFila(NodoMat Nuevo, NodoMat NodoAnt, NodoMat NodoSig){
-        NodoSig.izquierda = Nuevo;
-        Nuevo.derecha = NodoSig;
-        Nuevo.izquierda = NodoAnt;
-        NodoAnt.derecha = Nuevo;
+    private NodoMat ubicarFila(NodoMat primero, NodoMat nuevo, int y){
+        NodoMat aux = primero;
+        while(aux.derecha!=null && aux.posy!=y){
+            aux=aux.derecha;
+        }
+        if(aux.posy==y){//verificar
+            return aux;
+            //ubicarProfundidad(aux,nuevo);
+        }else{
+            aux.derecha = nuevo;
+            nuevo.izquierda = aux;
+            return null;
+        }
     }
     
-    public void ConecSimColumna(NodoMat nodo1, NodoMat nodo2){
-        nodo1.abajo = nodo2;
-        nodo2.arriba = nodo1;
+    private void ubicarProfundidad(NodoMat base, NodoMat nuevo){
+        NodoMat aux = base;
+        while(aux.atras!=null){
+            aux=aux.atras;
+        }
+        aux.atras=nuevo;
+        nuevo.adelante=aux;
     }
     
-    public void ConecDobCol(NodoMat Nuevo, NodoMat NodoUP, NodoMat NodoDown){
-        Nuevo.arriba = NodoUP;
-        Nuevo.abajo = NodoDown;
-        NodoDown.arriba = Nuevo;
-        NodoUP.abajo = Nuevo;
+    public void recorrer(Lista_Cabecera columna, Lista_Cabecera fila){
+        recColumna(columna);
+        recFila(fila);
     }
     
-    public void DConSimFila(NodoMat nodo1, NodoMat nodo2){
-        nodo1.derecha = nodo2.izquierda = null;
+    private void recColumna(Lista_Cabecera columna){
+        Nodo_Cabecera aux=columna.primero;
+        while(aux!=null){
+            System.out.println("<"+aux.id+">");
+            NodoMat aux1=aux.interior;
+            while(aux1!=null){
+                System.out.print("("+aux1.posx+","+aux1.posy+") ");
+                aux1=aux1.abajo;
+            }
+            System.out.println();
+            aux=aux.sig;
+        }
+    }
+    private void recFila(Lista_Cabecera fila){
+        Nodo_Cabecera aux=fila.primero;
+        while(aux!=null){
+            System.out.println("<"+aux.id+">");
+            NodoMat aux1=aux.interior;
+            while(aux1!=null){
+                System.out.println("["+aux1.posx+","+aux1.posy+"] ");
+                recProfundidad(aux1);//rev
+                System.out.println();//rev
+                aux1=aux1.derecha;
+            }
+            System.out.println();
+            aux=aux.sig;
+        }
     }
     
-    public void DConDobFila(NodoMat Nuevo, NodoMat NodoAnt, NodoMat NodoSig){
-        NodoSig.izquierda = NodoAnt;
-        NodoAnt.derecha = NodoSig;
-        Nuevo.izquierda = Nuevo.derecha = null;
-    }
-    
-    public void DConSimColumna(NodoMat nodo1, NodoMat nodo2){
-        nodo1.abajo = nodo2.arriba = null;
-    }
-    
-    public void DConDobColumna(NodoMat Nuevo, NodoMat NodoAnt, NodoMat NodoSig){
-        NodoSig.arriba = NodoAnt;
-        NodoAnt.abajo = NodoSig;
-        Nuevo.abajo = Nuevo.arriba = null;
+    private void recProfundidad(NodoMat base){
+        NodoMat aux=base;
+        if(aux.atras!=null){
+            while(aux!=null){
+                System.out.print("ยก"+aux.personaje+"! ");
+                aux=aux.atras;
+            }
+        }
     }
 }

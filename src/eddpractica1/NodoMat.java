@@ -9,13 +9,28 @@ package eddpractica1;
  * @author Rodolfo
  */
 public class NodoMat {
-    String URLImage;
-    public Lista_Personajes CaracterList;
-    NodoMat arriba, abajo, izquierda, derecha;
+     int tipo;
+    int posx;
+    int posy;
+    String personaje;
+    int danio;
+    int ataque;
+    NodoMat izquierda, derecha, arriba, abajo, atras, adelante;
+    //nodoCabecera cabeza;
     
-    public NodoMat(String URLImangen, Personaje lista){
-        this.URLImage = URLImangen;
-        CaracterList = new Lista_Personajes(lista);
-        arriba = abajo = izquierda = derecha = null;
-    }
+    public NodoMat(int tipo, int posx, int posy, String personaje, int danio, int ataque){
+        this.tipo=tipo;
+        this.posx=posx;
+        this.posy=posy;
+        this.personaje=personaje;
+        this.danio=danio;
+        this.ataque=ataque;
+        this.izquierda=null;
+        this.derecha=null;
+        this.arriba=null;
+        this.abajo=null;
+        this.atras=null;
+        this.adelante=null;
+        //this.cabeza=null;
+    }   
 }

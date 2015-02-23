@@ -47,30 +47,16 @@ public class ColaPlantas {
     }; // inserts an object 
 
     public int poll(){
-//        if (first == null){
-//          return null;
-//        }
         if(isEmpty() == false){
             Object o = first.elem;
             first = first.Next;
-            System.out.println(first.elem);
+            //System.out.println(first.elem);
             mostrar(first);
             size=-1;
         }else{
             System.out.println("La Cola Esta Vacia"); 
         }
         return 0;
-        
-//        public int Pop(){ 
-//        if(vacio(tope)==true){ 
-//            PilaZombies.NodoPila aux = tope;  
-//            tope=tope.getSig(); 
-//            mostrar(aux); 
-//        }else{ 
-//            System.out.println("La pila Esta Vacia"); 
-//        } 
-//        return 0; 
-//        } 
     } // gets the object from the queue
 
     public boolean isEmpty() {
