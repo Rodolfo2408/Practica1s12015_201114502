@@ -10,7 +10,7 @@ package eddpractica1;
  */
 public class Zombie {
     
-    boolean vivo;
+    
     String nombre, tipo, imagenURL;
     int ataque, defensa;
     Zombie siguiente;
@@ -18,14 +18,12 @@ public class Zombie {
    
     public Zombie(){}
 
-    public Zombie(String nombre, String tipo, String imagenURL, int ataque, int defensa, boolean vivo) {
+    public Zombie(String nombre, String tipo, String imagenURL, int ataque, int defensa) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.imagenURL = imagenURL;
         this.ataque = ataque;
         this.defensa = defensa;
-        this.vivo = vivo;
-        this.vivo = true;
     }
     
     public String getDato(){

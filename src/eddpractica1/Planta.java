@@ -13,19 +13,16 @@ public class Planta {
     String nombre, tipo, imagenURL;
     int ataque, defensa;
     int posX, posY;
-    boolean vivo;
     
     Planta siguiente, anterior;
 
     public Planta(){}
     
-    public Planta(String nombre, String tipo, String imagen, int defensa, int ataque, boolean vivo) {
+    public Planta(String nombre, String tipo, String imagen, int defensa, int ataque) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.ataque = ataque;
         this.defensa = defensa;
-        this.vivo = vivo;
-        this.vivo=true;
     }
     
     public String getDato(){

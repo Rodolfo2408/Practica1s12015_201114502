@@ -4,7 +4,6 @@
  */
 package eddpractica1;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -13,32 +12,16 @@ import javax.swing.*;
  *
  * @author Rodolfo
  */
-public class CrearPlantasZombies extends javax.swing.JFrame {
+public class CrearZombies extends javax.swing.JFrame {
 
-    public ListaPlanta plantas;
     public ListaZombie zombies;
-    
-    public Lista_Jugador jugadores;
-    
-    PilaZombies pila = new PilaZombies();
-    ColaPlantas cola = new ColaPlantas();
+    public ListaPlanta plantas;
     public JChomboBox jchombobox;
-    
     /**
-     *Array Imagenes de Plantas
+     * Creates new form CrearZombies
      */
-    public ImageIcon[] ItemsPlantas = {
-        new ImageIcon(getClass().getResource("/Images/planta 1.png")),
-        new ImageIcon(getClass().getResource("/Images/planta2.png")),
-        new ImageIcon(getClass().getResource("/Images/planta3.png")),
-        new ImageIcon(getClass().getResource("/Images/planta4.png")),
-        new ImageIcon(getClass().getResource("/Images/planta5.png")),
-        new ImageIcon(getClass().getResource("/Images/planta6.png")),
-        new ImageIcon(getClass().getResource("/Images/planta7.png"))
-    };
-    
     /**
-     *Array Imagenes de Zombies
+     * Array Imagenes de Zombies
      */
     public ImageIcon[] ItemsZombies = {
         new ImageIcon(getClass().getResource("/Images/zombie1.png")),
@@ -49,28 +32,19 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         new ImageIcon(getClass().getResource("/Images/zombie6.png")),
         new ImageIcon(getClass().getResource("/Images/zombie7.png"))
     };
-    
-    /**
-     * Creates new form CrearPlantasZombies
-     */
-    public CrearPlantasZombies() {
+
+    public CrearZombies() {
         initComponents();
-        
-        if(plantas == null){
-            jchombobox = new JChomboBox(ItemsPlantas.length);
-            jComboRender render = new jComboRender(ItemsPlantas);
-            jchombobox.setRenderer(render);
-        }else{
-            jchombobox = new JChomboBox(ItemsZombies.length);
-            jComboRender render = new jComboRender(ItemsZombies);
-            jchombobox.setRenderer(render);
-        }        
-                
-        this.add(jchombobox);
+        jchombobox = new JChomboBox(ItemsZombies.length);
+        jComboRender render = new jComboRender(ItemsZombies);
+        jchombobox.setRenderer(render);
+
+        PanelCombo.add(jchombobox);
+        //this.add(jchombobox);
         jchombobox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                System.out.println("Se Selecciono la Imagen "+ jchombobox.getSelectedItem());
+                System.out.println("Se Selecciono la Imagen " + jchombobox.getSelectedItem());
             }
         });
     }
@@ -85,8 +59,6 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btbAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -95,21 +67,17 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         txtPtsAtaque = new javax.swing.JTextField();
         txtPtsDefensa = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnSiguiente = new javax.swing.JButton();
         btbModificar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        btnSiguiente = new javax.swing.JButton();
+        PanelCombo = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
         jLabel1.setText("Imagen");
-
-        jLabel2.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
-        jLabel2.setText("Nombre");
-
-        jLabel3.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
-        jLabel3.setText("Puntos Ataque");
 
         jLabel4.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
         jLabel4.setText("Puntos Defensa");
@@ -133,8 +101,16 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
         jLabel5.setText("Ataque");
 
+        jLabel3.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
+        jLabel3.setText("Puntos Ataque");
+
+        jLabel2.setFont(new java.awt.Font("SketchFlow Print", 2, 12)); // NOI18N
+        jLabel2.setText("Nombre");
+
         jLabel6.setFont(new java.awt.Font("SimSun-ExtB", 0, 24)); // NOI18N
-        jLabel6.setText("Creacion de Personajes");
+        jLabel6.setText("Creacion de Zombies");
+
+        btbModificar.setText("Modificar");
 
         btnSiguiente.setText("Siguiente>>");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -143,30 +119,37 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
             }
         });
 
-        btbModificar.setText("Modificar");
-
-        jTextField1.setText("jTextField1");
+        javax.swing.GroupLayout PanelComboLayout = new javax.swing.GroupLayout(PanelCombo);
+        PanelCombo.setLayout(PanelComboLayout);
+        PanelComboLayout.setHorizontalGroup(
+            PanelComboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 164, Short.MAX_VALUE)
+        );
+        PanelComboLayout.setVerticalGroup(
+            PanelComboLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 22, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
                                 .addComponent(btbAdd)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDelete)
                                 .addGap(18, 18, 18)
                                 .addComponent(btbModificar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PanelCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombre)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,16 +167,11 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ComboDisparo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(43, 43, 43))
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel6)
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(168, 168, 168)
+                        .addComponent(jLabel6)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,64 +186,109 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboDisparo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDelete)
-                    .addComponent(btbAdd)
-                    .addComponent(btnSiguiente)
-                    .addComponent(btbModificar))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ComboDisparo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDelete)
+                            .addComponent(btbAdd)
+                            .addComponent(btnSiguiente)
+                            .addComponent(btbModificar)))
+                    .addComponent(PanelCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddActionPerformed
-        String imagen,nombre, ataque;
+        String nombre, ataque;
         int ptsAtaque, ptsDefensa;
-        imagen = jTextField1.getText();
-        //imagen = (String) jchombobox.getSelectedItem();
+        int imagen = (int)jchombobox.getSelectedItem();
+        String url = getImagen2(imagen);        
+        
         nombre = txtNombre.getText();
         ataque = (String) ComboDisparo.getSelectedItem();
         ptsAtaque = Integer.parseInt(txtPtsAtaque.getText());
         ptsDefensa = Integer.parseInt(txtPtsDefensa.getText());
         
-        if(plantas == null){
-            Planta planta = new Planta(nombre, ataque, imagen, ptsDefensa, ptsAtaque, true);
-            plantas.add(planta);
-        }else{
-            Zombie zombie = new Zombie(nombre, ataque, imagen, ptsAtaque, ptsDefensa, true);
-            zombies.add(zombie);
+        System.out.println("imagen"+imagen);
+
+        Zombie p = new Zombie(nombre, ataque, url, ptsDefensa, ptsAtaque);
+        if (zombies == null) {
+            zombies = new ListaZombie(p);
+        } else {
+            zombies.add(p);
         }
         
+        zombies.recorre();
+
     }//GEN-LAST:event_btbAddActionPerformed
 
+    public ImageIcon getImagen(int op){
+        switch(op){
+            case 0:
+                return new ImageIcon(getClass().getResource("/Images/zombie1.png"));
+            case 1:
+                return new ImageIcon(getClass().getResource("/Images/zombie2.png"));
+            case 2:
+                return new ImageIcon(getClass().getResource("/Images/zombie3.png"));
+            case 3:
+                return new ImageIcon(getClass().getResource("/Images/zombie4.png"));
+            case 4:
+                return new ImageIcon(getClass().getResource("/Images/zombie5.png"));
+            case 5:
+                return new ImageIcon(getClass().getResource("/Images/zombie6.png"));
+            case 6:
+                return new ImageIcon(getClass().getResource("/Images/zombie7.png"));
+            default:
+                return new ImageIcon(getClass().getResource("pasto.jpg"));
+        }
+    }
+    
+    public String getImagen2(int op){
+        String url="";
+        switch(op){
+            case 0:
+                url = "/Images/zombie1.png";
+                //return url;
+            case 1:
+                url = "/Images/zombie2.png";
+                //return url;
+            case 2:
+                url = "/Images/zombie3.png";
+            case 3:
+                url = "/Images/zombie4.png";
+            case 4:
+                url =  "/Images/zombie5.png";
+            case 5:
+                url = "/Images/zombie6.png";
+            case 6:
+                url = "/Images/zombie7.png";
+        }
+        return url;
+    }
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String nombre = JOptionPane.showInputDialog("Ingrese Nombre a Borrar");
         zombies.delete(nombre);
-        System.out.println("Se borro"+zombies.buscarDato(nombre));
-        plantas.delete(nombre);        
-        System.out.println("Se borro"+plantas.buscarDato(nombre));
+        System.out.println("Se borro" + zombies.buscarDato(nombre));
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
-        if(zombies != null && plantas != null){
-            Juego j = new Juego();
-            j.plantas = plantas;
-            j.zombies = zombies;
-            this.dispose();
-            j.setVisible(true);
-        }else{
-            JugPlantas jp = new JugPlantas();
+        if (zombies != null) {
+            Juego jp = new Juego();
             jp.plantas = plantas;
+            jp.zombies = zombies;
             this.dispose();
             jp.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Ingrese una Planta");
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
@@ -286,26 +309,26 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearPlantasZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearPlantasZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearPlantasZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearPlantasZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CrearZombies.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CrearPlantasZombies().setVisible(true);
+                new CrearZombies().setVisible(true);
             }
         });
-        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboDisparo;
+    private javax.swing.JPanel PanelCombo;
     private javax.swing.JButton btbAdd;
     private javax.swing.JButton btbModificar;
     private javax.swing.JButton btnDelete;
@@ -316,7 +339,6 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPtsAtaque;
     private javax.swing.JTextField txtPtsDefensa;

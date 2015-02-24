@@ -12,7 +12,8 @@ public class ListaPlanta {
     Planta primero, ultimo;
     
     public ListaPlanta(Planta nuevo){
-       primero = ultimo = nuevo;
+       primero = nuevo;
+       ultimo = nuevo;
     }
     
     public void add(Planta nuevo){
@@ -70,5 +71,13 @@ public class ListaPlanta {
             pivot = pivot.getSiguiente();
         }
         return false;
+    }
+    
+    public void recorre(){
+        Planta pivot = this.primero;
+        while (pivot != null){
+            System.out.println(pivot.nombre);
+            pivot = pivot.getSiguiente();
+        }
     }
 }

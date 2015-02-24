@@ -74,4 +74,16 @@ public class ListaZombie {
         return false;
     }
     
+    public void recorre(){
+        Zombie pivot = this.inicio;
+        while (pivot != null){
+            System.out.println(pivot.nombre);
+            System.out.println(pivot.imagenURL);
+            pivot = pivot.getSiguiente();
+        }
+    }
+    
+    public void graficar(){
+        
+    }
 }
