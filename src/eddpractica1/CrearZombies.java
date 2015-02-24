@@ -256,10 +256,8 @@ public class CrearZombies extends javax.swing.JFrame {
         switch(op){
             case 0:
                 url = "/Images/zombie1.png";
-                //return url;
             case 1:
                 url = "/Images/zombie2.png";
-                //return url;
             case 2:
                 url = "/Images/zombie3.png";
             case 3:
