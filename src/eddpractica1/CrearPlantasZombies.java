@@ -55,11 +55,17 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
      */
     public CrearPlantasZombies() {
         initComponents();
-        jchombobox = new JChomboBox(ItemsPlantas.length);
-        jComboRender render = new jComboRender(ItemsPlantas);
-        jchombobox.setRenderer(render);
-        jchombobox.setAlignmentX((float)0.5);
-        jchombobox.setAlignmentY((float) 0.5);
+        
+        if(plantas == null){
+            jchombobox = new JChomboBox(ItemsPlantas.length);
+            jComboRender render = new jComboRender(ItemsPlantas);
+            jchombobox.setRenderer(render);
+        }else{
+            jchombobox = new JChomboBox(ItemsZombies.length);
+            jComboRender render = new jComboRender(ItemsZombies);
+            jchombobox.setRenderer(render);
+        }        
+                
         this.add(jchombobox);
         jchombobox.addActionListener(new ActionListener() {
             @Override
@@ -131,6 +137,11 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         jLabel6.setText("Creacion de Personajes");
 
         btnSiguiente.setText("Siguiente>>");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
 
         btbModificar.setText("Modificar");
 
@@ -225,13 +236,38 @@ public class CrearPlantasZombies extends javax.swing.JFrame {
         ptsAtaque = Integer.parseInt(txtPtsAtaque.getText());
         ptsDefensa = Integer.parseInt(txtPtsDefensa.getText());
         
-        cola.add(new Planta(nombre, ataque, imagen, ptsDefensa, ptsAtaque, true));
+        if(plantas == null){
+            Planta planta = new Planta(nombre, ataque, imagen, ptsDefensa, ptsAtaque, true);
+            plantas.add(planta);
+        }else{
+            Zombie zombie = new Zombie(nombre, ataque, imagen, ptsAtaque, ptsDefensa, true);
+            zombies.add(zombie);
+        }
         
     }//GEN-LAST:event_btbAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        cola.poll();
+        String nombre = JOptionPane.showInputDialog("Ingrese Nombre a Borrar");
+        zombies.delete(nombre);
+        System.out.println("Se borro"+zombies.buscarDato(nombre));
+        plantas.delete(nombre);        
+        System.out.println("Se borro"+plantas.buscarDato(nombre));
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        if(zombies != null && plantas != null){
+            Juego j = new Juego();
+            j.plantas = plantas;
+            j.zombies = zombies;
+            this.dispose();
+            j.setVisible(true);
+        }else{
+            JugPlantas jp = new JugPlantas();
+            jp.plantas = plantas;
+            this.dispose();
+            jp.setVisible(true);
+        }
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     /**
      * @param args the command line arguments

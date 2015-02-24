@@ -14,8 +14,9 @@ import javax.swing.*;
  */
 public class Juego extends javax.swing.JFrame {
 
-    public Lista_Personajes personajes;
-    NodoMat2 actual;
+    ListaPlanta plantas;
+    ListaZombie zombies;
+    
     int Tamx,Tamy, trecx=96, trecy=96;
     int panelx=604, panely=546;
     JLabel[][] mGrafica;
