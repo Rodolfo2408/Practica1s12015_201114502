@@ -16,6 +16,7 @@ public class CrearZombies extends javax.swing.JFrame {
 
     public ListaZombie zombies;
     public ListaPlanta plantas;
+    public Lista_Jugador jugadores;
     public JChomboBox jchombobox;
     int cantZombies;
     /**
@@ -243,6 +244,9 @@ public class CrearZombies extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btbAddActionPerformed
 
+    public void obtenerdatos(Lista_Jugador j, ListaPlanta p, ListaZombie z){
+        
+    }
     
     public String getImagen2(int op){
         String url="";

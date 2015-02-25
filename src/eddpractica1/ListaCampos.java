@@ -29,12 +29,21 @@ public class ListaCampos {
         }
     }
     
-    public String recorrer(NodoCampo pivote){
-        pivote = primero;
-        while(pivote != null){
-            pivote=pivote.getSiguiente();
-            return pivote.Campo;
+    String graphListaC;
+    public String recorrer(String incio){
+        graphListaC = "";
+        NodoCampo pivote = primero;
+        if(pivote == null){
+            graphListaC = "";
+        }else if(pivote.sig == null){
+            graphListaC += incio + "->" + pivote.Campo + " ";
+        }else{
+            graphListaC += incio + "->"+ pivote.Campo + " ";
+            while(pivote.sig != null){
+                graphListaC += pivote.Campo + "->" + pivote.sig.Campo + " ";
+                pivote = pivote.sig;
+            }
         }
-        return null;
+        return graphListaC;
     }
 }

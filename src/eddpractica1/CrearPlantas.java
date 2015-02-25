@@ -26,7 +26,7 @@ public class CrearPlantas extends javax.swing.JFrame {
      *Array Imagenes de Plantas
      */ 
    public ImageIcon[] ItemsPlantas = {
-        new ImageIcon(getClass().getResource("/Images/planta 1.png")),
+        new ImageIcon(getClass().getResource("/Images/planta1.png")),
         new ImageIcon(getClass().getResource("/Images/planta2.png")),
         new ImageIcon(getClass().getResource("/Images/planta3.png")),
         new ImageIcon(getClass().getResource("/Images/planta4.png")),
@@ -115,7 +115,7 @@ public class CrearPlantas extends javax.swing.JFrame {
         jLabel5.setText("Ataque");
 
         jLabel6.setFont(new java.awt.Font("SimSun-ExtB", 0, 24)); // NOI18N
-        jLabel6.setText("Creacion de Personajes");
+        jLabel6.setText("Creacion de Plantas");
 
         btnSiguiente.setText("Siguiente>>");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +149,6 @@ public class CrearPlantas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btbAdd)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDelete)
@@ -181,7 +180,7 @@ public class CrearPlantas extends javax.swing.JFrame {
                         .addGap(182, 182, 182)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(lblConteo, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
+                        .addComponent(lblConteo, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
                 .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
@@ -239,8 +238,6 @@ public class CrearPlantas extends javax.swing.JFrame {
         }else{
             plantas.add(p);
         }
-        
-        
     }//GEN-LAST:event_btbAddActionPerformed
 
     public String getImagen(int op){
@@ -265,6 +262,10 @@ public class CrearPlantas extends javax.swing.JFrame {
     
     }
     
+    public void obtenerdatos(Lista_Jugador j, ListaPlanta p, ListaZombie z){
+        
+    }
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String nombre = JOptionPane.showInputDialog("Ingrese Nombre a Borrar");
         plantas.delete(nombre);        
@@ -273,10 +274,10 @@ public class CrearPlantas extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if(plantas != null){
-            JugPlantas jp = new JugPlantas();
-            jp.plantas = plantas;
+            JugZombies jz = new JugZombies();
+            jz.plantas = plantas;
             this.dispose();
-            jp.setVisible(true);
+            jz.setVisible(true);
         }
     }//GEN-LAST:event_btnSiguienteActionPerformed
 

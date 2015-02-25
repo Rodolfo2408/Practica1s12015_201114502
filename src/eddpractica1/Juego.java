@@ -120,6 +120,11 @@ public class Juego extends javax.swing.JFrame {
         jMenu2.setText("Edit");
 
         jMenuItem1.setText("Reportes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuBar1.add(jMenu2);
@@ -178,6 +183,12 @@ public class Juego extends javax.swing.JFrame {
         desplegarCola();
         desplegarPila();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try{
+        GraphvizJugadores();
+        }catch(IOException e){}
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     public void desplegarCola(){
         for(int i=0;i<1;i++){
@@ -234,13 +245,27 @@ public class Juego extends javax.swing.JFrame {
         return TempIcon;
     }
     
+    public void GraphvizJugadores() throws IOException{
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\LZombies.dot");
+        FileWriter Fw = new FileWriter(archivo);
+        Fw.append(texto);
+        Fw.append(graficarJugadores(JugPlantas.jugadores.primero.Nombre));
+        Fw.append("}");
+        graphListPlan = "";
+        Fw.close();
+        ExDot("LZombies.dot", "Zombies.jpg");
+    }
+    
+    
+    
     public void GraphvizLP() throws IOException{
         
         String texto = "Digraph G {";
         File archivo = new File("C:\\Images\\LPlantas.dot");
         FileWriter Fw = new FileWriter(archivo);
         Fw.append(texto);
-        Fw.append(graficarLP(plantas.primero));
+        Fw.append(graficarLP(plantas.primero.nombre));
         Fw.append("}");
         graphListPlan = "";
         Fw.close();
@@ -253,7 +278,7 @@ public class Juego extends javax.swing.JFrame {
         File archivo = new File("C:\\Images\\LZombies.dot");
         FileWriter Fw = new FileWriter(archivo);
         Fw.append(texto);
-        Fw.append(graficarLP(zombies.inicio));
+        Fw.append(graficarLP(zombies.inicio.nombre));
         Fw.append("}");
         graphListPlan = "";
         Fw.close();
@@ -261,43 +286,100 @@ public class Juego extends javax.swing.JFrame {
     }
     
     String graphListPlan, graphListZom, graphJugadores;
-    public String graficarLP(Planta raiz){
-    
+    public String graficarLP(String raiz){
+        Planta aux = plantas.primero;
+        
+        if(aux == null){
+            graphListPlan = "";
+        }else if(aux.siguiente == null){
+            graphListPlan += raiz + "->" + aux.nombre + " ";
+        }else{
+            graphListPlan += raiz + "->"+ aux.nombre + " ";
+            while(aux.siguiente != null){
+                graphListPlan += aux.nombre + "->" + aux.siguiente.nombre + " ";
+                aux = aux.siguiente;
+            }
+        }        
         return graphListPlan;
     }
     
-    public String graficarJugadores(NodoJugador nj){
-        NodoJugador aux = jugadores.primero;
+    public String graficarLP(Planta raiz){
+        Planta aux = plantas.primero;
+        
+        if(aux == null){
+            graphListPlan = "";
+        }else if(aux.siguiente == null){
+            graphListPlan += raiz + "->" + aux.nombre + " ";
+        }else{
+            graphListPlan += raiz + "->"+ aux.nombre + " ";
+            while(aux.siguiente != null){
+                graphListPlan += aux.nombre + "->" + aux.siguiente.nombre + " ";
+                aux = aux.siguiente;
+            }
+        }        
+        return graphListPlan;
+    }
+    
+    public String graficarJugadores(String raiz){
+        NodoJugador aux = JugPlantas.jugadores.primero;
         while(aux != null){
-            graphJugadores += aux.Nombre + "->" + aux.sig.Nombre +" ";
-            graphJugadores += aux.campos.recorrer(nj.Nombre);
+            graphJugadores += raiz + "->" + aux.sig.Nombre +" \n";
+            graphJugadores += aux.campos.recorrer(aux.Nombre);
+            aux = aux.sig;
+            
+            if(aux.sig == null){
+                break;
+            }
         }
         return graphJugadores;
     }
     
-    public String graficarLZ(Zombie z){
+    public String graficarLZ(String incio){
+        Zombie aux = zombies.inicio;
         
-        
+        if(aux == null){
+            graphListZom = "";
+        }else if(aux.siguiente == null){
+            graphListZom += incio + "->" + aux.nombre + " ";
+        }else{
+            graphListZom += incio + "->"+ aux.nombre + " ";
+            while(aux.siguiente != null){
+                graphListZom += aux.nombre + "->" + aux.siguiente.nombre + " ";
+                aux = aux.siguiente;
+            }
+        }        
         return graphListZom;
-//        Zombie aux = zombies.inicio;
-//        escribir.write("\n {rank=min; ListaZ;");
-//        int i=0;
-//        while(aux != null){
-//            escribir.write("node"+aux.hashCode()+"[label=\""+aux.nombre+"\"];");
-//            aux = aux.siguiente;
-//            i++;
-//        }
-//        escribir.write("};");
     }
     
     private void ExDot(String archivodot, String img){
-        try{
-            ProcessBuilder pb = new ProcessBuilder("dot","-Tpng", "-o", img, archivodot );
-            pb.redirectErrorStream( true );
-            pb.start();
-            pb.wait();
-        }catch(Exception e){
-            e.printStackTrace();
+         try {
+
+            String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+            String fileInputPath = "C:\\Users\\Rodolfo\\Documents\\NetBeansProjects\\PracticaLFP\\grafo.txt";
+            String fileOutputPath = "C:\\Users\\Rodolfo\\Documents\\NetBeansProjects\\reproductor\\grafo.jpg";
+            String tParam = "-Tjpg";
+            String tOParam = "-o";
+            //concatenamos nuestras direcciones. Lo que hice es crear un vector, para poder editar las direcciones de entrada y salida, usando las variables antes inicializadas
+            //recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz 2.21\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
+
+            String[] cmd = new String[5];
+            cmd[0] = dotPath;
+            cmd[1] = tParam;
+            cmd[2] = fileInputPath;
+            cmd[3] = tOParam;
+            cmd[4] = fileOutputPath;
+
+//Invocamos nuestra clase 
+
+            Runtime rt = Runtime.getRuntime();
+
+//Ahora ejecutamos como lo hacemos en consola
+
+            rt.exec(cmd);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
         }
     }
     /**
