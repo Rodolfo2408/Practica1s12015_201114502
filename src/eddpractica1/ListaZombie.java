@@ -82,8 +82,4 @@ public class ListaZombie {
             pivot = pivot.getSiguiente();
         }
     }
-    
-    public void graficar(){
-        
-    }
 }

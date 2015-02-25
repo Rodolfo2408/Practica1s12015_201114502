@@ -12,7 +12,8 @@ public class ListaCampos {
     NodoCampo primero, ultimo;
     
     public ListaCampos(NodoCampo nuevo){
-        primero = ultimo = nuevo;
+        primero = nuevo;
+        ultimo = nuevo;
     }
     
     public void add(NodoCampo nuevo){
@@ -26,5 +27,14 @@ public class ListaCampos {
             }
             pivot = pivot.getSiguiente();
         }
+    }
+    
+    public String recorrer(NodoCampo pivote){
+        pivote = primero;
+        while(pivote != null){
+            pivote=pivote.getSiguiente();
+            return pivote.Campo;
+        }
+        return null;
     }
 }

@@ -4,26 +4,33 @@
  */
 package eddpractica1;
 
-import java.awt.GridBagLayout;
-import java.awt.Image;
+import java.awt.*;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.*;
+import java.io.*;
 /**
  *
  * @author Rodolfo
  */
 public class Juego extends javax.swing.JFrame {
 
+    Lista_Jugador jugadores;
     ListaPlanta plantas;
     ListaZombie zombies;
     
     int Tamx,Tamy, trecx=96, trecy=96;
+    int Tamvx=1, Tamvy=5;
+    
     int panelx=604, panely=546;
+    int panel2x=100, panel2y=548;
     JLabel[][] mGrafica;
+    JLabel[][] ColaGrafica = new JLabel[1][5];
+    JLabel[][] PilaGrafica = new JLabel[1][5];
     /**
      * Creates new form Juego
      */
    public JLabel label = new JLabel();
+    
         
     
     public Juego() {
@@ -42,8 +49,8 @@ public class Juego extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         PanelTablero = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        PanePlanta = new javax.swing.JPanel();
+        PaneZombie = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -76,6 +83,28 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout PanePlantaLayout = new javax.swing.GroupLayout(PanePlanta);
+        PanePlanta.setLayout(PanePlantaLayout);
+        PanePlantaLayout.setHorizontalGroup(
+            PanePlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        PanePlantaLayout.setVerticalGroup(
+            PanePlantaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PaneZombieLayout = new javax.swing.GroupLayout(PaneZombie);
+        PaneZombie.setLayout(PaneZombieLayout);
+        PaneZombieLayout.setHorizontalGroup(
+            PaneZombieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        PaneZombieLayout.setVerticalGroup(
+            PaneZombieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         jMenu1.setText("File");
 
         jMenuItem2.setText("Salir");
@@ -105,11 +134,11 @@ public class Juego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PanePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(PanelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(PaneZombie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(jLabel1)
@@ -119,16 +148,16 @@ public class Juego extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PanelTablero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PanelTablero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PaneZombie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanePlanta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -146,14 +175,41 @@ public class Juego extends javax.swing.JFrame {
         Tamy= y;
         mGrafica = new JLabel[Tamx][Tamy];
         desplegar2();
-        
+        desplegarCola();
+        desplegarPila();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public void desplegarCola(){
+        for(int i=0;i<1;i++){
+            for( int j=0; j<5; j++){
+                ColaGrafica[i][j] = new JLabel();           
+                ColaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
+                ColaGrafica[i][j].setIcon(ajustarImagen2("pasto2.jpg"));
+                ColaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+                this.PanePlanta.add(ColaGrafica[i][j]);
+                this.PanePlanta.repaint();           
+            }
+        } 
+    }
+    
+    public void desplegarPila(){
+        for(int i=0;i<1;i++){
+            for( int j=0; j<5; j++){
+                PilaGrafica[i][j] = new JLabel();           
+                PilaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
+                PilaGrafica[i][j].setIcon(ajustarImagen2("pasto2.jpg"));
+                PilaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+                this.PaneZombie.add(PilaGrafica[i][j]);
+                this.PaneZombie.repaint();           
+            }
+        } 
+    }
     
     public void desplegar2(){
         for(int i=0;i<Tamx;i++){
             for(int j=0;j<Tamy;j++){ 
                 mGrafica[i][j] = new JLabel();           
-                mGrafica[i][j].setBounds(i *(panelx / Tamx), j * (panely / Tamy), panelx / Tamx, panely / Tamy);
+                mGrafica[i][j].setBounds(i *(panelx / Tamx), j * (panely / Tamvy), panelx / Tamx, panely / Tamy);
                 mGrafica[i][j].setIcon(ajustarImagen("pasto.jpg"));
                 mGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PanelTablero.add(mGrafica[i][j]);
@@ -162,12 +218,87 @@ public class Juego extends javax.swing.JFrame {
         } 
     }
     
+    private ImageIcon ajustarImagen2(String image)
+    {
+        ImageIcon TempIconEx = new ImageIcon(image);     
+        ImageIcon TempIcon;
+        TempIcon = new ImageIcon(TempIconEx.getImage().getScaledInstance(panel2x / Tamvx, panel2y / Tamvy, Image.SCALE_DEFAULT));
+        return TempIcon;
+    }
+    
     private ImageIcon ajustarImagen(String image)
     {
         ImageIcon TempIconEx = new ImageIcon(image);     
         ImageIcon TempIcon;
         TempIcon = new ImageIcon(TempIconEx.getImage().getScaledInstance(panelx / Tamx, panely / Tamy, Image.SCALE_DEFAULT));
         return TempIcon;
+    }
+    
+    public void GraphvizLP() throws IOException{
+        
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\LPlantas.dot");
+        FileWriter Fw = new FileWriter(archivo);
+        Fw.append(texto);
+        Fw.append(graficarLP(plantas.primero));
+        Fw.append("}");
+        graphListPlan = "";
+        Fw.close();
+        ExDot("", texto);
+    }
+    
+    public void GraphvizLZ() throws IOException{
+        
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\LZombies.dot");
+        FileWriter Fw = new FileWriter(archivo);
+        Fw.append(texto);
+        Fw.append(graficarLP(zombies.inicio));
+        Fw.append("}");
+        graphListPlan = "";
+        Fw.close();
+        ExDot("", texto);
+    }
+    
+    String graphListPlan, graphListZom, graphJugadores;
+    public String graficarLP(Planta raiz){
+    
+        return graphListPlan;
+    }
+    
+    public String graficarJugadores(NodoJugador nj){
+        NodoJugador aux = jugadores.primero;
+        while(aux != null){
+            graphJugadores += aux.Nombre + "->" + aux.sig.Nombre +" ";
+            graphJugadores += aux.campos.recorrer(nj.Nombre);
+        }
+        return graphJugadores;
+    }
+    
+    public String graficarLZ(Zombie z){
+        
+        
+        return graphListZom;
+//        Zombie aux = zombies.inicio;
+//        escribir.write("\n {rank=min; ListaZ;");
+//        int i=0;
+//        while(aux != null){
+//            escribir.write("node"+aux.hashCode()+"[label=\""+aux.nombre+"\"];");
+//            aux = aux.siguiente;
+//            i++;
+//        }
+//        escribir.write("};");
+    }
+    
+    private void ExDot(String archivodot, String img){
+        try{
+            ProcessBuilder pb = new ProcessBuilder("dot","-Tpng", "-o", img, archivodot );
+            pb.redirectErrorStream( true );
+            pb.start();
+            pb.wait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     /**
      * @param args the command line arguments
@@ -205,6 +336,8 @@ public class Juego extends javax.swing.JFrame {
         
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanePlanta;
+    private javax.swing.JPanel PaneZombie;
     private javax.swing.JPanel PanelTablero;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -213,8 +346,6 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
     

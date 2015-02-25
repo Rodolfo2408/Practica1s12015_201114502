@@ -139,7 +139,8 @@ public class JugPlantas extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String nombre = jTextField1.getText();
         cantidad = Integer.parseInt(jTextField2.getText());
-        NodoJugador nj = new NodoJugador(nombre);
+        NodoCampo nc = new NodoCampo();
+        NodoJugador nj = new NodoJugador(nombre, nc);
         
         if(jugadores == null){
             jugadores = new Lista_Jugador(nj);

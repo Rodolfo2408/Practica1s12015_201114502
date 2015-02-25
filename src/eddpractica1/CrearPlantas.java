@@ -19,8 +19,7 @@ public class CrearPlantas extends javax.swing.JFrame {
    
     public Lista_Jugador jugadores;
     
-    PilaZombies pila = new PilaZombies();
-    ColaPlantas cola = new ColaPlantas();
+    int cantPlantas=100;
     public JChomboBox jchombobox;
     
     /**
@@ -41,12 +40,13 @@ public class CrearPlantas extends javax.swing.JFrame {
      */
     public CrearPlantas() {
         initComponents();
-        
+        lblConteo.setText(Integer.toString(cantPlantas));
         jchombobox = new JChomboBox(ItemsPlantas.length);
         jComboRender render = new jComboRender(ItemsPlantas);
         jchombobox.setRenderer(render);
                
-        this.add(jchombobox);
+        PanelListado.add(jchombobox);
+        //this.add(jchombobox);
         jchombobox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -78,7 +78,8 @@ public class CrearPlantas extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnSiguiente = new javax.swing.JButton();
         btbModificar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        lblConteo = new javax.swing.JLabel();
+        PanelListado = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,7 +126,18 @@ public class CrearPlantas extends javax.swing.JFrame {
 
         btbModificar.setText("Modificar");
 
-        jTextField1.setText("jTextField1");
+        lblConteo.setText("Cantidad Plantas: ");
+
+        javax.swing.GroupLayout PanelListadoLayout = new javax.swing.GroupLayout(PanelListado);
+        PanelListado.setLayout(PanelListadoLayout);
+        PanelListadoLayout.setHorizontalGroup(
+            PanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        PanelListadoLayout.setVerticalGroup(
+            PanelListadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,16 +149,16 @@ public class CrearPlantas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btbAdd)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDelete)
                                 .addGap(18, 18, 18)
                                 .addComponent(btbModificar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(73, 73, 73)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(27, 27, 27)
+                                .addComponent(PanelListado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombre)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -164,12 +176,13 @@ public class CrearPlantas extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ComboDisparo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(43, 43, 43))
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(jLabel6)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblConteo, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
+                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,7 +192,9 @@ public class CrearPlantas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblConteo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -188,12 +203,13 @@ public class CrearPlantas extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComboDisparo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ComboDisparo)
+                        .addComponent(txtNombre)
+                        .addComponent(txtPtsAtaque)
+                        .addComponent(txtPtsDefensa))
+                    .addComponent(PanelListado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
@@ -207,15 +223,17 @@ public class CrearPlantas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btbAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbAddActionPerformed
-        String imagen,nombre, ataque;
+        String imagenaux,nombre, ataque;
         int ptsAtaque, ptsDefensa;
-        imagen = jTextField1.getText();
+        int imagen = (int) jchombobox.getSelectedItem();
+        imagenaux = getImagen(imagen);
+        
         nombre = txtNombre.getText();
         ataque = (String) ComboDisparo.getSelectedItem();
         ptsAtaque = Integer.parseInt(txtPtsAtaque.getText());
         ptsDefensa = Integer.parseInt(txtPtsDefensa.getText());
         
-        Planta p = new Planta(nombre, ataque, imagen, ptsDefensa, ptsAtaque);
+        Planta p = new Planta(nombre, ataque, imagenaux, ptsDefensa, ptsAtaque);
         if(plantas == null){
             plantas = new ListaPlanta(p);
         }else{
@@ -225,6 +243,28 @@ public class CrearPlantas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btbAddActionPerformed
 
+    public String getImagen(int op){
+        String url="";
+        switch(op){
+            case 0:
+                url = "/Images/zombie1.png";
+            case 1:
+                url = "/Images/zombie2.png";
+            case 2:
+                url = "/Images/zombie3.png";
+            case 3:
+                url = "/Images/zombie4.png";
+            case 4:
+                url =  "/Images/zombie5.png";
+            case 5:
+                url = "/Images/zombie6.png";
+            case 6:
+                url = "/Images/zombie7.png";
+        }
+        return url;
+    
+    }
+    
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String nombre = JOptionPane.showInputDialog("Ingrese Nombre a Borrar");
         plantas.delete(nombre);        
@@ -277,6 +317,7 @@ public class CrearPlantas extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboDisparo;
+    private javax.swing.JPanel PanelListado;
     private javax.swing.JButton btbAdd;
     private javax.swing.JButton btbModificar;
     private javax.swing.JButton btnDelete;
@@ -287,7 +328,7 @@ public class CrearPlantas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblConteo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPtsAtaque;
     private javax.swing.JTextField txtPtsDefensa;

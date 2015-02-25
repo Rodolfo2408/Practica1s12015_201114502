@@ -12,6 +12,7 @@ public class NodoJugador {
     public NodoJugador sig, ant;
     public ListaCampos campos;
     
+    int cantidad;
     String Nombre;
     
     public NodoJugador(String campo) {

@@ -13,6 +13,8 @@ public class NodoCampo {
     
     String Campo;
     
+    public NodoCampo(){}
+    
     public NodoCampo(String campo) {
         this.Campo = campo;
     }
