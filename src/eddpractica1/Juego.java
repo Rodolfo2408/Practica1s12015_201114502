@@ -57,6 +57,7 @@ public class Juego extends javax.swing.JFrame {
         PaneZombie = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -125,6 +126,13 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Insertar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
 
         jMenuItem2.setText("Salir");
@@ -160,12 +168,12 @@ public class Juego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanePlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(PanelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PanelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
+                        .addComponent(jButton4)
+                        .addGap(69, 69, 69)
                         .addComponent(jLabel1)
                         .addGap(32, 32, 32)
                         .addComponent(jButton1)))
@@ -183,7 +191,8 @@ public class Juego extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jLabel1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PanelTablero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,6 +237,24 @@ public class Juego extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         pila.Pop();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        int x1 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Columnas"));
+        int y2 = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Filas"));
+        String tipo = JOptionPane.showInputDialog("Ingrese Tipo");
+        String url = JOptionPane.showInputDialog("Ingrese url");
+        int a = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ataque"));
+        int d = Integer.parseInt(JOptionPane.showInputDialog("Ingrese Defensa"));
+        
+        Matriz_Ortogonal mat = new Matriz_Ortogonal();
+        Lista_Cabecera x = new Lista_Cabecera();
+        Lista_Cabecera y = new Lista_Cabecera();
+        x.add(x1);
+        y.add(y2);
+        
+        mat.add(x, y, tipo, x1, y2, url, a, d);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     public void desplegarCola(){
         for(int i=0;i<1;i++){
@@ -563,6 +590,7 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

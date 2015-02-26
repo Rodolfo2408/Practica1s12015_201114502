@@ -9,7 +9,7 @@ package eddpractica1;
  * @author Rodolfo
  */
 public class NodoMat {
-     int tipo;
+    String tipo;
     int posx;
     int posy;
     String personaje;
@@ -17,7 +17,7 @@ public class NodoMat {
     int ataque;
     public static NodoMat izquierda, derecha, arriba, abajo, atras, adelante;
     
-    public NodoMat(int tipo, int posx, int posy, String personaje, int danio, int ataque){
+    public NodoMat(String tipo, int posx, int posy, String personaje, int danio, int ataque){
         this.tipo=tipo;
         this.posx=posx;
         this.posy=posy;

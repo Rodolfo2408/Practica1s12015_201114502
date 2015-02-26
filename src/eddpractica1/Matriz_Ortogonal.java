@@ -10,11 +10,11 @@ package eddpractica1;
  */
 public class Matriz_Ortogonal {
     
-    public void add(Lista_Cabecera col, Lista_Cabecera fil, int tipo, int x, int y, String pic, int danio, int ataque){
+    public void add(Lista_Cabecera col, Lista_Cabecera fil, String tipo, int x, int y, String pic, int danio, int ataque){
         NodoMat actX=null,actY=null;
         NodoMat nuevo = new NodoMat(tipo,x,y,pic,danio,ataque);
         Nodo_Cabecera auxC,auxF;
-        auxC=col.buscar(y);     //todos los nodos a buscar deben existir
+        auxC=col.buscar(y);     
         auxF=fil.buscar(x);
         if(auxC.interior==null){
             auxC.interior=nuevo;
@@ -36,9 +36,8 @@ public class Matriz_Ortogonal {
         while(aux.abajo!=null && aux.posx!=x){
             aux=aux.abajo;
         }
-        if(aux.posx==x){//verificar
+        if(aux.posx==x){
             return aux;
-            //ubicarProfundidad(aux,nuevo);
         }else{
             aux.abajo=nuevo;
             nuevo.arriba=aux;
