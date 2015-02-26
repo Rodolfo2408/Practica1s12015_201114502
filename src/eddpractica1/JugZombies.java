@@ -11,7 +11,7 @@ package eddpractica1;
 public class JugZombies extends javax.swing.JFrame {
 
     int cantidad;
-    public Lista_Jugador jugadores;
+    //public Lista_Jugador jugadores;
     
     public ListaPlanta plantas;
     public ListaZombie zombies;
@@ -122,18 +122,18 @@ public class JugZombies extends javax.swing.JFrame {
         NodoCampo nc = new NodoCampo();
         NodoJugador nj = new NodoJugador(nombre, nc);
 
-        if(jugadores == null){
+        if(JugPlantas.jugadores == null){
             System.out.println("entro si jugadores es null");
-            jugadores = new Lista_Jugador(nj);
+            JugPlantas.jugadores = new Lista_Jugador(nj);
             CrearZombies CP = new CrearZombies();
-            CP.jugadores = jugadores;
+            CP.jugadores = JugPlantas.jugadores;
             this.dispose();
             CP.setVisible(true);
         }else{
             System.out.println("entro si jugadores agrega");
-            jugadores.add(nj);
+            JugPlantas.jugadores.add(nj);
             CrearZombies CZ = new CrearZombies();
-            CZ.jugadores = jugadores;
+            CZ.jugadores = JugPlantas.jugadores;
             CZ.setVisible(true);
             this.dispose();
         }
@@ -145,10 +145,10 @@ public class JugZombies extends javax.swing.JFrame {
         String campo = jTextField3.getText();
         cantidad = Integer.parseInt(jTextField2.getText());
 
-        if(jugadores == null){
+        if(JugPlantas.jugadores == null){
             NodoCampo NC = new NodoCampo(campo);
             NodoJugador NJ = new NodoJugador(nombre, NC);
-            jugadores = new Lista_Jugador(NJ);
+            JugPlantas.jugadores = new Lista_Jugador(NJ);
             actual = NJ;
         }else{
             if(actual != null){
@@ -158,12 +158,6 @@ public class JugZombies extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    public void obtenerdatos(Lista_Jugador j, ListaPlanta p, ListaZombie z){
-        jugadores = j;
-        plantas = p;
-        zombies = z;
-    }
     /**
      * @param args the command line arguments
      */

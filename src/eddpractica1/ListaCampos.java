@@ -34,7 +34,7 @@ public class ListaCampos {
         graphListaC = "";
         NodoCampo pivote = primero;
         if(pivote == null){
-            graphListaC = "";
+            graphListaC = "NULL";
         }else if(pivote.sig == null){
             graphListaC += incio + "->" + pivote.Campo + " ";
         }else{

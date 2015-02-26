@@ -229,32 +229,31 @@ public class Juego extends javax.swing.JFrame {
         } 
     }
     
-    private ImageIcon ajustarImagen2(String image)
-    {
+    private ImageIcon ajustarImagen2(String image){
         ImageIcon TempIconEx = new ImageIcon(image);     
         ImageIcon TempIcon;
         TempIcon = new ImageIcon(TempIconEx.getImage().getScaledInstance(panel2x / Tamvx, panel2y / Tamvy, Image.SCALE_DEFAULT));
         return TempIcon;
     }
     
-    private ImageIcon ajustarImagen(String image)
-    {
+    private ImageIcon ajustarImagen(String image){
         ImageIcon TempIconEx = new ImageIcon(image);     
         ImageIcon TempIcon;
         TempIcon = new ImageIcon(TempIconEx.getImage().getScaledInstance(panelx / Tamx, panely / Tamy, Image.SCALE_DEFAULT));
         return TempIcon;
     }
     
-    public void GraphvizJugadores() throws IOException{
+    public void GraphvizJugadores() throws FileNotFoundException{
         String texto = "Digraph G {";
-        File archivo = new File("C:\\Images\\LZombies.dot");
-        FileWriter Fw = new FileWriter(archivo);
-        Fw.append(texto);
-        Fw.append(graficarJugadores(JugPlantas.jugadores.primero.Nombre));
-        Fw.append("}");
+        File archivo = new File("C:\\Images\\Jugadores.dot");
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarJugadores(JugPlantas.jugadores.primero.Nombre));
+        Fw.println("}");
         graphListPlan = "";
         Fw.close();
-        ExDot("LZombies.dot", "Zombies.jpg");
+        ExDot("Jugadores.dot", "Jugadores.png");
+        
     }
     
     
@@ -325,8 +324,7 @@ public class Juego extends javax.swing.JFrame {
         while(aux != null){
             graphJugadores += raiz + "->" + aux.sig.Nombre +" \n";
             graphJugadores += aux.campos.recorrer(aux.Nombre);
-            aux = aux.sig;
-            
+            aux = aux.sig;            
             if(aux.sig == null){
                 break;
             }
@@ -354,29 +352,14 @@ public class Juego extends javax.swing.JFrame {
     private void ExDot(String archivodot, String img){
          try {
 
-            String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
-            String fileInputPath = "C:\\Users\\Rodolfo\\Documents\\NetBeansProjects\\PracticaLFP\\grafo.txt";
-            String fileOutputPath = "C:\\Users\\Rodolfo\\Documents\\NetBeansProjects\\reproductor\\grafo.jpg";
-            String tParam = "-Tjpg";
-            String tOParam = "-o";
-            //concatenamos nuestras direcciones. Lo que hice es crear un vector, para poder editar las direcciones de entrada y salida, usando las variables antes inicializadas
-            //recordemos el comando en la consola de windows: C:\Archivos de programa\Graphviz 2.21\bin\dot.exe -Tjpg grafo1.txt -o grafo1.jpg Esto es lo que concatenamos en el vector siguiente:
-
-            String[] cmd = new String[5];
-            cmd[0] = dotPath;
-            cmd[1] = tParam;
-            cmd[2] = fileInputPath;
-            cmd[3] = tOParam;
-            cmd[4] = fileOutputPath;
-
-//Invocamos nuestra clase 
-
-            Runtime rt = Runtime.getRuntime();
-
-//Ahora ejecutamos como lo hacemos en consola
-
-            rt.exec(cmd);
-
+            //String dotPath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+            String fileInputPath = "C:\\Images\\"+archivodot;
+            String fileOutputPath = "C:\\Images\\"+img;
+            ProcessBuilder pb;
+            pb = new ProcessBuilder("dot", "-Tpng", "-o", fileOutputPath, fileInputPath);
+            pb.redirectErrorStream(true);
+            pb.start();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

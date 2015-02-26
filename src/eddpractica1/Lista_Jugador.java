@@ -28,4 +28,21 @@ public class Lista_Jugador {
             pivote = pivote.getSiguiente();
         }
     }
+    
+    public void recorrer(){
+        NodoJugador aux = primero;
+        while(aux != null){
+            System.out.println(aux.Nombre);
+            NodoCampo aux2 = aux.campos.primero;
+            while(aux2 != null){
+                System.out.print(aux2.Campo);
+                aux2 = aux2.sig;
+            }
+            aux = aux.sig;
+        }
+    }
+    
+    public void Recgraph(){
+        
+    }
 }
