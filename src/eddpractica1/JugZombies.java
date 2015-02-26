@@ -10,7 +10,7 @@ package eddpractica1;
  */
 public class JugZombies extends javax.swing.JFrame {
 
-    int cantidad;
+    public static int cantidad;
     //public Lista_Jugador jugadores;
     
     public ListaPlanta plantas;

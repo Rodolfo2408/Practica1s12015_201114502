@@ -4,6 +4,8 @@
  */
 package eddpractica1;
 
+import static eddpractica1.ListaZombie.tamanio;
+
 /**
  *
  * @author Rodolfo
@@ -79,5 +81,28 @@ public class ListaPlanta {
             System.out.println(pivot.nombre);
             pivot = pivot.getSiguiente();
         }
+    }
+    
+    public int Size(){
+        Planta piv = this.primero;
+        while(piv != null){
+            tamanio++;
+            piv = piv.siguiente;
+        }
+        return tamanio;
+    }
+    
+    public Planta nodo(int clave){
+        Planta aux = this.primero;
+        int t = Size();
+        int retorno=0;
+        for(int i=0; i<t; i++ ){
+            if(retorno == clave){
+                return aux;
+            }
+            retorno++;
+            aux = aux.siguiente;
+        }
+        return null;
     }
 }

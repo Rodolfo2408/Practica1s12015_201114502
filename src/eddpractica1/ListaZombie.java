@@ -12,6 +12,7 @@ public class ListaZombie {
     
     Zombie inicio;
     Zombie ultimo;
+    public static int tamanio;
     
     public ListaZombie(Zombie nuevo){
         inicio = ultimo = nuevo;
@@ -74,6 +75,8 @@ public class ListaZombie {
         return false;
     }
     
+    
+    
     public void recorre(){
         Zombie pivot = this.inicio;
         while (pivot != null){
@@ -81,5 +84,28 @@ public class ListaZombie {
             System.out.println(pivot.imagenURL);
             pivot = pivot.getSiguiente();
         }
+    }
+    
+    public int Size(){
+        Zombie piv = this.inicio;
+        while(piv != null){
+            tamanio++;
+            piv = piv.siguiente;
+        }
+        return tamanio;
+    }
+    
+    public Zombie nodo(int clave){
+        Zombie aux = inicio;
+        int t = Size();
+        int retorno=0;
+        for(int i=0; i<t; i++ ){
+            if(retorno == clave){
+                return aux;
+            }
+            retorno++;
+            aux = aux.siguiente;
+        }
+        return null;
     }
 }

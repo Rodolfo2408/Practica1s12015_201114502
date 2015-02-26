@@ -14,7 +14,7 @@ import javax.swing.*;
  */
 public class CrearZombies extends javax.swing.JFrame {
 
-    public ListaZombie zombies;
+    public static ListaZombie zombies;
     public ListaPlanta plantas;
     public Lista_Jugador jugadores;
     public JChomboBox jchombobox;
@@ -49,6 +49,9 @@ public class CrearZombies extends javax.swing.JFrame {
                 System.out.println("Se Selecciono la Imagen " + jchombobox.getSelectedItem());
             }
         });
+        
+        cantZombies = JugZombies.cantidad;
+        ContZom.setText("Cantidad de Zombies: "+Integer.toString(cantZombies));
     }
 
     /**
@@ -166,30 +169,30 @@ public class CrearZombies extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPtsAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtPtsDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ComboDisparo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(ContZom, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(44, 44, 44)
-                .addComponent(ContZom)
-                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
                     .addComponent(ContZom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(34, 34, 34)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -213,7 +216,7 @@ public class CrearZombies extends javax.swing.JFrame {
                     .addComponent(btbAdd)
                     .addComponent(btnSiguiente)
                     .addComponent(btbModificar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -239,14 +242,16 @@ public class CrearZombies extends javax.swing.JFrame {
             zombies.add(p);
         }
         
-        cantZombies--;
+        cantZombies-=1;
+        ContZom.setText("Cantidad de Plantas: "+Integer.toString(cantZombies));
+        ContZom.repaint();
+        
+        if(cantZombies == 0){
+            btbAdd.setEnabled(false);
+        }
         zombies.recorre();
 
     }//GEN-LAST:event_btbAddActionPerformed
-
-    public void obtenerdatos(Lista_Jugador j, ListaPlanta p, ListaZombie z){
-        
-    }
     
     public String getImagen2(int op){
         String url="";
@@ -273,6 +278,14 @@ public class CrearZombies extends javax.swing.JFrame {
         String nombre = JOptionPane.showInputDialog("Ingrese Nombre a Borrar");
         zombies.delete(nombre);
         System.out.println("Se borro" + zombies.buscarDato(nombre));
+        
+        cantZombies+=1;
+        ContZom.setText("Cantidad de Zombies: "+Integer.toString(cantZombies));
+        ContZom.repaint();
+        
+        if(cantZombies != 0){
+            btbAdd.setEnabled(false);
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed

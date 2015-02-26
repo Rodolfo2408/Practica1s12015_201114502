@@ -17,6 +17,8 @@ public class Juego extends javax.swing.JFrame {
     Lista_Jugador jugadores;
     ListaPlanta plantas;
     ListaZombie zombies;
+    public static ColaPlantas cola;
+    public static PilaZombies pila;
     
     int Tamx,Tamy, trecx=96, trecy=96;
     int Tamvx=1, Tamvy=5;
@@ -51,6 +53,8 @@ public class Juego extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         PanePlanta = new javax.swing.JPanel();
         PaneZombie = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -105,6 +109,10 @@ public class Juego extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jButton2.setText("Extraer Pila");
+
+        jButton3.setText("Extraer Cola");
+
         jMenu1.setText("File");
 
         jMenuItem2.setText("Salir");
@@ -136,19 +144,23 @@ public class Juego extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanePlanta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(PanePlanta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(PanelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(PaneZombie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
+                        .addComponent(PanelTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
                         .addComponent(jLabel1)
                         .addGap(32, 32, 32)
                         .addComponent(jButton1)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PaneZombie, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -157,7 +169,9 @@ public class Juego extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PanelTablero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -195,6 +209,7 @@ public class Juego extends javax.swing.JFrame {
             for( int j=0; j<5; j++){
                 ColaGrafica[i][j] = new JLabel();           
                 ColaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
+                CrearPlantas.plantas.nodo(i);
                 ColaGrafica[i][j].setIcon(ajustarImagen2("pasto2.jpg"));
                 ColaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PanePlanta.add(ColaGrafica[i][j]);
@@ -232,6 +247,7 @@ public class Juego extends javax.swing.JFrame {
     private ImageIcon ajustarImagen2(String image){
         ImageIcon TempIconEx = new ImageIcon(image);     
         ImageIcon TempIcon;
+        
         TempIcon = new ImageIcon(TempIconEx.getImage().getScaledInstance(panel2x / Tamvx, panel2y / Tamvy, Image.SCALE_DEFAULT));
         return TempIcon;
     }
@@ -255,8 +271,6 @@ public class Juego extends javax.swing.JFrame {
         ExDot("Jugadores.dot", "Jugadores.png");
         
     }
-    
-    
     
     public void GraphvizLP() throws IOException{
         
@@ -365,6 +379,27 @@ public class Juego extends javax.swing.JFrame {
         } finally {
         }
     }
+    
+    
+    public void insertarPila(){
+        Zombie actual;
+        for(int i=0; i<CrearZombies.zombies.Size(); i++){
+            actual = CrearZombies.zombies.nodo(i);
+            pila.Push(actual);
+        }
+    }
+    
+    public void insertarCola(){
+        Planta actual;
+        for(int i=0; i<CrearPlantas.plantas.Size(); i++){
+            actual = CrearPlantas.plantas.nodo(i);
+            cola.add(actual);
+        }
+    }
+    
+    public void eliminarCola(){
+        cola.poll();
+    }
     /**
      * @param args the command line arguments
      */
@@ -405,6 +440,8 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JPanel PaneZombie;
     private javax.swing.JPanel PanelTablero;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

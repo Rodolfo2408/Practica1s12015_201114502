@@ -145,14 +145,12 @@ public class JugPlantas extends javax.swing.JFrame {
         
         if(jugadores == null){
             jugadores = new Lista_Jugador(nj);
-            CrearPlantas CP = new CrearPlantas();
-            CP.jugadores = jugadores;         
+            CrearPlantas CP = new CrearPlantas();       
             CP.setVisible(true);
             this.dispose();
         }else{
             jugadores.add(nj);
             CrearPlantas CP = new CrearPlantas();
-            CP.jugadores = jugadores;         
             CP.setVisible(true);
             this.dispose();
         }
