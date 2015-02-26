@@ -111,12 +111,16 @@ public class ListaZombie {
         return null;
     }
     
-    public String imagenes(){
+    public String imagenes(int clave){
         Zombie aux = inicio;
         String URL="";
         for(int i=0; i<Size(); i++){
-            URL = aux.imagenURL;
-            return URL;
+            if(retorno == clave){
+                URL = aux.imagenURL;
+                return URL;
+            }
+            retorno++;
+            aux = aux.siguiente;
         }
         return null;
     }

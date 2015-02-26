@@ -15,7 +15,7 @@ public class NodoMat {
     String personaje;
     int danio;
     int ataque;
-    NodoMat izquierda, derecha, arriba, abajo, atras, adelante;
+    public static NodoMat izquierda, derecha, arriba, abajo, atras, adelante;
     
     public NodoMat(int tipo, int posx, int posy, String personaje, int danio, int ataque){
         this.tipo=tipo;

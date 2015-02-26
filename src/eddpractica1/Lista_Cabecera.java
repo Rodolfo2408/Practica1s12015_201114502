@@ -9,8 +9,10 @@ package eddpractica1;
  * @author Rodolfo
  */
 public class Lista_Cabecera {
-    Nodo_Cabecera primero;
-    Nodo_Cabecera ultimo;
+    
+    public static Nodo_Cabecera primero;
+    public static Nodo_Cabecera ultimo;
+    public static Nodo_Cabecera arriba, abajo;
     
     public Lista_Cabecera(){
         primero=null;

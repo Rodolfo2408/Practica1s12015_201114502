@@ -36,7 +36,9 @@ public class Juego extends javax.swing.JFrame {
         
     
     public Juego() {
-        initComponents();        
+        initComponents();    
+        insertarCola();
+        insertarPila();
     }
 
     /**
@@ -202,8 +204,10 @@ public class Juego extends javax.swing.JFrame {
         try{
         GraphvizJugadores();
         GraphvizLZ();
-        GraphvizLZ();
-        gra
+        GraphvizLP();
+        GraphvizPila();
+        GraphvizCola();
+        //GraphvizMat();
         }catch(IOException e){}
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
@@ -212,7 +216,7 @@ public class Juego extends javax.swing.JFrame {
             for( int j=0; j<5; j++){
                 ColaGrafica[i][j] = new JLabel();           
                 ColaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
-                ColaGrafica[i][j].setIcon(ajustarImagen2(Cre));
+                ColaGrafica[i][j].setIcon(ajustarImagen2(CrearPlantas.plantas.imagenes(j)));
                 ColaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PanePlanta.add(ColaGrafica[i][j]);
                 this.PanePlanta.repaint();           
@@ -225,7 +229,7 @@ public class Juego extends javax.swing.JFrame {
             for( int j=0; j<5; j++){
                 PilaGrafica[i][j] = new JLabel();           
                 PilaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
-                PilaGrafica[i][j].setIcon(ajustarImagen2(CrearZombies.zombies.imagenes()));
+                PilaGrafica[i][j].setIcon(ajustarImagen2(CrearZombies.zombies.imagenes(j)));
                 PilaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PaneZombie.add(PilaGrafica[i][j]);
                 this.PaneZombie.repaint();           
@@ -261,43 +265,157 @@ public class Juego extends javax.swing.JFrame {
         return TempIcon;
     }
     
-    public void GraphvizJugadores() throws FileNotFoundException{
+    public void GraphvizJugadores() throws IOException{
         String texto = "Digraph G {";
         File archivo = new File("C:\\Images\\Jugadores.dot");
         PrintWriter Fw = new PrintWriter(archivo);
         Fw.println(texto);
         Fw.println(graficarJugadores(JugPlantas.jugadores.primero.Nombre));
         Fw.println("}");
-        graphListPlan = "";
+        graphJugadores="";
         Fw.close();
         ExDot("Jugadores.dot", "Jugadores.png");
         
     }
     
+    String graphpila;
+    public void GraphvizPila() throws IOException{
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\Pila.dot");
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarPila((String)pila.tope.obj));
+        Fw.println("}");
+        graphpila = "";
+        Fw.close();
+        ExDot("Jugadores.dot", "Jugadores.png");
+    }
+    
+    public void GraphvizCola() throws IOException{
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\Cola.dot");
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarCola((String)cola.first.elem));
+        Fw.println("}");
+        graphpila = "";
+        Fw.close();
+        ExDot("Jugadores.dot", "Jugadores.png");
+    }
+    
     public void GraphvizLP() throws IOException{
-        
         String texto = "Digraph G {";
         File archivo = new File("C:\\Images\\LPlantas.dot");
-        FileWriter Fw = new FileWriter(archivo);
-        Fw.append(texto);
-        Fw.append(graficarLP(plantas.primero.nombre));
-        Fw.append("}");
-        graphListPlan = "";
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarLZ(graficarLP(CrearPlantas.plantas.primero.nombre)));
+        Fw.println("}");
+        graphpila = "";
         Fw.close();
-        ExDot("", texto);
+        ExDot("LPlantas.dot", "LPantas.png");
     }
     
     public void GraphvizLZ() throws IOException{
-        
         String texto = "Digraph G {";
         File archivo = new File("C:\\Images\\LZombies.dot");
-        FileWriter Fw = new FileWriter(archivo);
-        Fw.append(texto);
-        Fw.append(graficarLP(zombies.inicio.nombre));
-        Fw.append("}");
-        graphListPlan = "";
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarLZ(CrearZombies.zombies.inicio.nombre));
+        Fw.println("}");
+        graphpila = "";
         Fw.close();
-        ExDot("", texto);
+        ExDot("LZombies.dot", "LZombies.png");
+    }
+    
+    public void GraphvizMat() throws IOException{
+        String texto = "Digraph G {";
+        File archivo = new File("C:\\Images\\LZombies.dot");
+        PrintWriter Fw = new PrintWriter(archivo);
+        Fw.println(texto);
+        Fw.println(graficarLZ(CrearZombies.zombies.inicio.nombre));
+        Fw.println("}");
+        graphpila = "";
+        Fw.close();
+        ExDot("LZombies.dot", "LZombies.png");
+    }
+    
+    public void graficarX(PrintWriter escribe){
+        Nodo_Cabecera aux = Lista_Cabecera.primero;
+        escribe.println("\n {rank=min; MATRIZ;");
+        int i=0;
+        while (aux != null)
+        {
+            escribe.println("node" + aux.hashCode()+ "[label=\"" + aux.sig + "\"];");
+
+            aux = aux.sig;
+            i++;
+        }
+        escribe.println("};");
+    }
+    
+    /*
+    public void graficarY(PrintWriter escribir){
+        Nodo_Cabecera aux = Lista_Cabecera.primero;
+        NodoMat nmatriz;
+        while (aux != null){
+            if (aux.sig != null){
+                escribir.println("\n{rank=same;");
+            }
+            else
+            {
+                escribir.println("\n{rank=max;");
+            }
+
+            escribir.Write("node" + aux.hashCode() + "[label=\"" + aux. + "\"];");
+
+            i++;
+            nmatriz = aux.iniFila;
+
+            while (nmatriz != null)
+            {
+                string concatenar = nmatriz.nave +"---"+  nmatriz.nivel + "---"+ nmatriz.acertado;
+
+                escribir.Write("node" + nmatriz.GetHashCode() + "[label=\"" + concatenar + "\"];");
+
+                nmatriz = nmatriz.sig;
+                j++;
+            }
+            escribir.Write("};");
+            aux = aux.sig;
+        }
+    }*/
+    
+    public String graficarPila(String raiz){
+        PilaZombies.NodoPila aux = pila.tope;
+        if(aux == null){
+            graphpila="";
+        }else if(aux.sig == null){
+            graphpila += raiz + "->" + aux.obj + "\n";
+        }else{
+            graphpila += raiz + "->" + aux.obj + "\n";
+            while(aux.sig != null){
+                graphpila += aux.obj + "->" + aux.sig.obj + "\n";
+                aux = aux.sig;
+            }
+        }
+        return graphpila;
+    }
+    
+    String graphCola;
+    public String graficarCola(String raiz){
+        ColaPlantas.Node aux = cola.first;
+        if(aux == null){
+            graphCola="";
+        }else if(aux.Next == null){
+            graphpila += raiz + "->" + aux.elem + "\n";
+        }else{
+            graphpila += raiz + "->" + aux.elem + "\n";
+            while(aux.Next != null){
+                graphpila += aux.elem + "->" + aux.Next.elem + "\n";
+                aux = aux.Next;
+            }
+        }
+        return graphCola;
     }
     
     String graphListPlan, graphListZom, graphJugadores;
@@ -316,25 +434,8 @@ public class Juego extends javax.swing.JFrame {
             }
         }        
         return graphListPlan;
-    }
-    
-    public String graficarLP(Planta raiz){
-        Planta aux = plantas.primero;
-        
-        if(aux == null){
-            graphListPlan = "";
-        }else if(aux.siguiente == null){
-            graphListPlan += raiz + "->" + aux.nombre + " ";
-        }else{
-            graphListPlan += raiz + "->"+ aux.nombre + " ";
-            while(aux.siguiente != null){
-                graphListPlan += aux.nombre + "->" + aux.siguiente.nombre + " ";
-                aux = aux.siguiente;
-            }
-        }        
-        return graphListPlan;
-    }
-    
+    }  
+       
     public String graficarJugadores(String raiz){
         NodoJugador aux = JugPlantas.jugadores.primero;
         while(aux != null){
