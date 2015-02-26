@@ -92,16 +92,26 @@ public class ListaPlanta {
         return tamanio;
     }
     
+    int retorno;
     public Planta nodo(int clave){
         Planta aux = this.primero;
         int t = Size();
-        int retorno=0;
         for(int i=0; i<t; i++ ){
             if(retorno == clave){
                 return aux;
             }
             retorno++;
             aux = aux.siguiente;
+        }
+        return null;
+    }
+    
+    public String imagenes(){
+        Planta aux = primero;
+        String URL="";
+        for(int i=0; i<Size(); i++){
+            URL = aux.imagenURL;
+            return URL;
         }
         return null;
     }

@@ -4,6 +4,8 @@
  */
 package eddpractica1;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Rodolfo
@@ -95,16 +97,26 @@ public class ListaZombie {
         return tamanio;
     }
     
+    int retorno;
     public Zombie nodo(int clave){
         Zombie aux = inicio;
         int t = Size();
-        int retorno=0;
         for(int i=0; i<t; i++ ){
             if(retorno == clave){
                 return aux;
             }
             retorno++;
             aux = aux.siguiente;
+        }
+        return null;
+    }
+    
+    public String imagenes(){
+        Zombie aux = inicio;
+        String URL="";
+        for(int i=0; i<Size(); i++){
+            URL = aux.imagenURL;
+            return URL;
         }
         return null;
     }

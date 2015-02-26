@@ -201,6 +201,9 @@ public class Juego extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try{
         GraphvizJugadores();
+        GraphvizLZ();
+        GraphvizLZ();
+        gra
         }catch(IOException e){}
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
@@ -209,8 +212,7 @@ public class Juego extends javax.swing.JFrame {
             for( int j=0; j<5; j++){
                 ColaGrafica[i][j] = new JLabel();           
                 ColaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
-                CrearPlantas.plantas.nodo(i);
-                ColaGrafica[i][j].setIcon(ajustarImagen2("pasto2.jpg"));
+                ColaGrafica[i][j].setIcon(ajustarImagen2(Cre));
                 ColaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PanePlanta.add(ColaGrafica[i][j]);
                 this.PanePlanta.repaint();           
@@ -223,7 +225,7 @@ public class Juego extends javax.swing.JFrame {
             for( int j=0; j<5; j++){
                 PilaGrafica[i][j] = new JLabel();           
                 PilaGrafica[i][j].setBounds(i *(panel2x / Tamvx), j * (panel2y / Tamvy), panel2x / Tamvx, panel2y / Tamvy);
-                PilaGrafica[i][j].setIcon(ajustarImagen2("pasto2.jpg"));
+                PilaGrafica[i][j].setIcon(ajustarImagen2(CrearZombies.zombies.imagenes()));
                 PilaGrafica[i][j].setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
                 this.PaneZombie.add(PilaGrafica[i][j]);
                 this.PaneZombie.repaint();           
