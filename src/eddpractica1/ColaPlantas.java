@@ -50,7 +50,6 @@ public class ColaPlantas {
         if(isEmpty() == false){
             Object o = first.elem;
             first = first.Next;
-            //System.out.println(first.elem);
             mostrar(first);
             size=-1;
         }else{

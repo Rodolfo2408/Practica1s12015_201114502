@@ -112,8 +112,18 @@ public class Juego extends javax.swing.JFrame {
         );
 
         jButton2.setText("Extraer Pila");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Extraer Cola");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -210,6 +220,14 @@ public class Juego extends javax.swing.JFrame {
         //GraphvizMat();
         }catch(IOException e){}
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        cola.poll();        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        pila.Pop();
+    }//GEN-LAST:event_jButton2ActionPerformed
     
     public void desplegarCola(){
         for(int i=0;i<1;i++){
